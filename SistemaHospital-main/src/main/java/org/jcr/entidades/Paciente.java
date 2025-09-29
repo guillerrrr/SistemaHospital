@@ -12,14 +12,15 @@ import java.util.List;
 import java.util.Objects;
 
 @Getter
-@ToString(callSuper = true, onlyExplicitlyIncluded = true)
+@ToString(onlyExplicitlyIncluded = true)
 public class Paciente extends Persona implements Serializable {
-    @ToString.Include
-    private final HistoriaClinica historiaClinica;
     @ToString.Include
     private final String telefono;
     @ToString.Include
     private final String direccion;
+
+    @ToString.Exclude
+    private final HistoriaClinica historiaClinica;
     @Setter
     @ToString.Exclude
     private Hospital hospital;
