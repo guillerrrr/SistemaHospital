@@ -1,5 +1,9 @@
 package org.jcr.entidades;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,11 +11,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@ToString(callSuper = true, onlyExplicitlyIncluded = true)
 public class Paciente extends Persona implements Serializable {
+    @ToString.Include
     private final HistoriaClinica historiaClinica;
+    @ToString.Include
     private final String telefono;
+    @ToString.Include
     private final String direccion;
+    @Setter
+    @ToString.Exclude
     private Hospital hospital;
+
     private final List<Cita> citas = new ArrayList<>();
 
     public Paciente(String nombre, String apellido, String dni, LocalDate fechaNacimiento,
@@ -20,22 +32,6 @@ public class Paciente extends Persona implements Serializable {
         this.telefono = validarString(telefono, "El teléfono no puede ser nulo ni vacío");
         this.direccion = validarString(direccion, "La dirección no puede ser nula ni vacía");
         this.historiaClinica = new HistoriaClinica(this);
-    }
-
-    public HistoriaClinica getHistoriaClinica() {
-        return historiaClinica;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public Hospital getHospital() {
-        return hospital;
     }
 
     public void setHospital(Hospital hospital) {
@@ -64,16 +60,5 @@ public class Paciente extends Persona implements Serializable {
             throw new IllegalArgumentException(mensajeError);
         }
         return valor;
-    }
-
-    @Override
-    public String toString() {
-        return "Paciente{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", dni='" + dni + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", tipoSangre=" + tipoSangre.getDescripcion() +
-                '}';
     }
 }

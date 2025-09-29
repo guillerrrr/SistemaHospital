@@ -1,14 +1,18 @@
 package org.jcr.entidades;
 
+import lombok.Getter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
+
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.math.BigDecimal;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Getter
+@ToString
+@EqualsAndHashCode
 public class CitaManager implements CitaService {
     private final List<Cita> citas = new ArrayList<>();
     private final Map<Paciente, List<Cita>> citasPorPaciente = new ConcurrentHashMap<>();

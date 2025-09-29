@@ -1,10 +1,16 @@
 package org.jcr.entidades;
+
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@ToString
 public class Hospital implements Serializable {
     private final String nombre;
     private final String direccion;
@@ -16,18 +22,6 @@ public class Hospital implements Serializable {
         this.nombre = validarString(nombre, "El nombre del hospital no puede ser nulo ni vacío");
         this.direccion = validarString(direccion, "La dirección no puede ser nula ni vacía");
         this.telefono = validarString(telefono, "El teléfono no puede ser nulo ni vacío");
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public String getTelefono() {
-        return telefono;
     }
 
     public void agregarDepartamento(Departamento departamento) {
@@ -58,15 +52,6 @@ public class Hospital implements Serializable {
 
     List<Paciente> getInternalPacientes() {
         return pacientes;
-    }
-
-    @Override
-    public String toString() {
-        return "Hospital{" +
-                "nombre='" + nombre + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono='" + telefono + '\'' +
-                '}';
     }
 
     private String validarString(String valor, String mensajeError) {

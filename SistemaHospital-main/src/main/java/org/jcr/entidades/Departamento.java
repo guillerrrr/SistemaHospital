@@ -1,32 +1,28 @@
 package org.jcr.entidades;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 public class Departamento implements Serializable {
     private final String nombre;
     private final EspecialidadMedica especialidad;
+
+    @Setter
     private Hospital hospital;
+
     private final List<Medico> medicos = new ArrayList<>();
     private final List<Sala> salas = new ArrayList<>();
 
     public Departamento(String nombre, EspecialidadMedica especialidad) {
         this.nombre = validarString(nombre, "El nombre del departamento no puede ser nulo ni vacío");
         this.especialidad = Objects.requireNonNull(especialidad, "La especialidad no puede ser nula");
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public EspecialidadMedica getEspecialidad() {
-        return especialidad;
-    }
-
-    public Hospital getHospital() {
-        return hospital;
     }
 
     public void setHospital(Hospital hospital) {

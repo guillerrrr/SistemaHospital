@@ -1,13 +1,24 @@
 package org.jcr.entidades;
+
+import lombok.Getter;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Getter
+@ToString(onlyExplicitlyIncluded = true)
 public abstract class Persona implements Serializable {
+    @ToString.Include
     protected final String nombre;
+    @ToString.Include
     protected final String apellido;
+    @ToString.Include
     protected final String dni;
+    @ToString.Include
     protected final LocalDate fechaNacimiento;
+    @ToString.Include
     protected final TipoSangre tipoSangre;
 
     public Persona(String nombre, String apellido, String dni, LocalDate fechaNacimiento, TipoSangre tipoSangre) {
@@ -16,26 +27,6 @@ public abstract class Persona implements Serializable {
         this.dni = validarDni(dni);
         this.fechaNacimiento = Objects.requireNonNull(fechaNacimiento, "La fecha de nacimiento no puede ser nula");
         this.tipoSangre = Objects.requireNonNull(tipoSangre, "El tipo de sangre no puede ser nulo");
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public String getDni() {
-        return dni;
-    }
-
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public TipoSangre getTipoSangre() {
-        return tipoSangre;
     }
 
     public String getNombreCompleto() {
@@ -60,16 +51,5 @@ public abstract class Persona implements Serializable {
             throw new IllegalArgumentException("El DNI debe tener 7 u 8 dígitos");
         }
         return dni;
-    }
-
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", dni='" + dni + '\'' +
-                ", fechaNacimiento=" + fechaNacimiento +
-                ", tipoSangre=" + tipoSangre.getDescripcion() +
-                '}';
     }
 }
